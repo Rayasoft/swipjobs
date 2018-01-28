@@ -1,0 +1,64 @@
+<section >
+  <div class="card">
+      <div class="card-header bg-primary text-white">
+        <h2>{{title}}</h2>
+      </div>
+      <div class="card-block pt-2 pl-2">        
+          <div class="row">          
+            <div class="col-sm-2">
+                <img class="img-thumbnail rounded"  [src]="jobsAvailable.company?.logo" alt="person image">              
+            </div>        
+            <div class="col-sm-10 pl-2">
+                <div class="d-flex w-100 justify-content-between">
+                    <h5 class="mb-1">{{jobsAvailable.title}}</h5>
+                </div>
+                <h5 class="mb-1 text-muted">{{jobsAvailable.company?.name}}</h5>
+                <h5 class="mb-1 text-muted">{{(jobsAvailable.wagePerHourInCents/100) | currency:'USD':true:'1.2-4'}}/hr</h5>
+                <h5 class="mb-1 text-muted "><b>{{startDayOfWork | date: 'EE, MMM dd'}} {{endDayOfWork | date: '- EE, MMM dd'}}</b></h5>            
+            </div> 
+          </div>
+          <div class="row mt-3">         
+              <div class="col-sm-12">
+                      <h5 class="mb-1">If you take this job you are agreed to work ALL DAYS.</h5>
+              </div>            
+          </div>          
+          <div class="d-flex flex-row text-muted" *ngFor="let shift of jobsAvailable.shifts">
+              <div class="width110 text-muted strong"><h5>{{shift.startDate | date:'EEEE'}},</h5></div>
+              <div class="width110"><h5>{{shift.startDate | date:'MMM dd'}}</h5></div>
+              <div><h5>{{shift.startDate | date:'HH:mm a'}} {{getTimezone(shift.startDate)}}</h5></div>
+          </div> 
+          <hr class="style2"/>   
+          <div class="row">         
+              <div class="col-sm-12">
+                <h5 class="mb-1 text-muted">Location</h5>
+              </div>      
+              <div class="col-sm-12">                
+                <a target="_blank" [attr.href]="mapAddress(jobsAvailable.company?.address)"><h5><u>{{jobsAvailable.company?.address}}</u></h5></a>
+              </div>
+          </div>  
+          <hr class="style2"/>
+          <div class="row">         
+              <div class="col-sm-12">
+                <h5 class="mb-1 text-muted">Branch</h5>                
+              </div>      
+              <div class="col-sm-12">
+                  <h5 class="mb-1 text-muted">{{jobsAvailable.branch}}</h5>                
+                </div>       
+              <div class="col-sm-12">
+                <a href="tel:{{jobsAvailable.branchPhoneNumber}}" ><h5><u>{{jobsAvailable.branchPhoneNumber}}</u></h5> </a>
+              </div>
+          </div>          
+          <hr class="style3"/>
+
+          <div class="row justify-content-between">
+              <div class="col-4">
+                  <button type="button" class="btn btn-link float-left" (click)="backToHomepage($event)"><h5> NO THANKS</h5></button>
+              </div>
+              <div class="col-4 offset-sm-4">
+                  <button type="button" class="btn btn-link float-right" (click)="takeTheJob($event)"><h5>I'LL TAKE IT</h5></button>
+              </div>
+            </div>          
+      </div>      
+    </div>     
+    
+</section>
